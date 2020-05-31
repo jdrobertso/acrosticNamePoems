@@ -7,9 +7,11 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
+	rand.Seed(time.Now().Unix())
 	fmt.Println("What is your name?")
 	var input string
 	fmt.Scanln(&input)
