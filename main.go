@@ -50,9 +50,6 @@ func mapOfPositiveWords() map[rune][]string {
 	for _, word := range positiveWordsSlice {
 		runes := []rune(word)
 		slice := value[runes[0]]
-		if value == nil {
-			value = make(map[rune][]string)
-		}
 		value[runes[0]] = append(slice, word)
 	}
 	return value
