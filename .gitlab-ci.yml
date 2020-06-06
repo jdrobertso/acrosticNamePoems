@@ -1,0 +1,24 @@
+image: docker:19.03.11
+
+services:
+  - docker:19.03.11-dind
+
+stages:
+  - build
+  - deploy
+
+docker_build:
+  stage: build
+  script:
+    - docker build -t registry.gitlab.com/jdrobertso/acrosticnamepoems .
+
+docker_deploy:
+  stage: deploy
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t registry.gitlab.com/jdrobertso/acrosticnamepoems .
+    - docker push registry.gitlab.com/jdrobertso/acrosticnamepoems
+  only:
+    refs:
+      - master
